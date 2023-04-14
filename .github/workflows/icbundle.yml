@@ -45,9 +45,6 @@ jobs:
           done
       - name: Update Changelog and Version.h files
         run: |
-          git config --local --add remote.origin.fetch "+refs/tags/*:refs/tags/*"
-          git ls-remote --tags origin
-          git fetch origin v7.0.0-rc4
           rev_num=$(git rev-list v7.0.0-rc4.. --count)
           changelog_entry=$'#Changelog\n\n## Development Build: v7.0.0-rc4+dev'${rev_num}
-          sed -i 's/# #Changelog/"$changelog_entry"/' /path/to/file
+          sed -i 's/# #Changelog/"$changelog_entry"/' CHANGELOG.md
