@@ -38,7 +38,7 @@ jobs:
           for pr in $prs
           do
             src_branch=$(hub pr show -f %H $pr)
-            pr_title=$(hub pr show -f %t %pr)
+            pr_title=$(hub pr show -f %t $pr)
             commit_msg="Merge pull request #$pr from $src_branch\n\n$pr_title"
             git fetch origin pull/$pr/head:origin/pull/$pr/head
             git merge origin/pull/$pr/head --no-ff -m "$commit_msg"
