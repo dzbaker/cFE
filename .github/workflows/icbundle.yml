@@ -27,4 +27,9 @@ jobs:
           git checkout integration-candidate
           git rebase main
       - name: Merge each PR
-        run: echo ${{ inputs.pr_nums }}
+        run: |
+          prs = $(echo ${{ inputs.pr_nums }} | | tr "," "\n")
+          for pr in $prs
+          do
+              echo $pr
+          done
