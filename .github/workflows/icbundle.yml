@@ -4,6 +4,11 @@ name: Integration Candidate Bundle Generation
 
 on:
   workflow_dispatch:
+    inputs:
+      pr_nums:
+        description: 'The pull request numbers to include. Comma separated'
+        required: true
+        type: string
 
 jobs:
   generate-ic-bundle:
@@ -21,3 +26,5 @@ jobs:
           git pull
           git checkout integration-candidate
           git rebase main
+      - name: Merge each PR
+          echo ${{ inputs.pr_nums }}
