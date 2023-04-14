@@ -43,4 +43,8 @@ jobs:
             git fetch origin pull/$pr/head:origin/pull/$pr/head
             git merge origin/pull/$pr/head --no-ff -m "$commit_msg"
           done
-          git log
+      - name: Update Changelog and Version.h files
+        run: |
+          rev_num=$(git rev-list v7.0.0-rc4.. --count)
+          changelog_entry=$'#Changelog\n\n## Development Build: v7.0.0-rc4+dev'${rev_num}
+          sed -i 's/# #Changelog/"$changelog_entry"/' /path/to/file
