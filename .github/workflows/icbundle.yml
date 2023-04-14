@@ -44,7 +44,7 @@ jobs:
       - name: Rebase IC Branch
         run: |
           git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          git config user.email "cfs-program@list.nasa.gov"
           git pull
           git checkout integration-candidate
           git rebase main
@@ -53,6 +53,7 @@ jobs:
           prs=$(echo ${{ inputs.pr_nums }} | tr "," "\n")
           for pr in $prs
           do
+              gh pr view $pr
               git fetch origin pull/$pr/head:origin/pull/$pr/head
               git merge origin/pull/$pr/head --no-ff -m "Merge pull request #$pr from branch\n\nmessage"
           done
