@@ -1,0 +1,24 @@
+name: Integration Candidate Bundle Generation
+
+# Generate Integration Candidate branch for this repository.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-ic-bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout IC Branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Rebase IC Branch
+        run: |
+          ls
+          git --version
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          git status
+          git tag
+          git describe
