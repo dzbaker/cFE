@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       pr_nums:
-        description: 'The pull request numbers to include. Comma separated'
+        description: 'The pull request numbers to include (Comma separated)'
         required: true
         type: string
 
@@ -56,3 +56,4 @@ jobs:
               git fetch origin pull/$pr/head:origin/pull/$pr/head
               git merge origin/pull/$pr/head --no-ff -m "Merge pull request #$pr from branch\n\nmessage"
           done
+          git log
