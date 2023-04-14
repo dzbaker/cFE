@@ -19,28 +19,28 @@ jobs:
         with:
           fetch-depth: '0'
           ref: main
-      - name: Configure Local Repository
-        run: |
-          gitconfigfile='[core]
-            repositoryformatversion = 0
-            filemode = true
-            bare = false
-            logallrefupdates = true
-          [remote "origin"]
-            url = https://github.com/dzbaker/cFE
-            fetch = +refs/heads/*:refs/remotes/origin/*
-          [remote "origin"]
-            fetch = +refs/pull/*:refs/remotes/origin/pull/
-            gh-resolved = base
-          [gc]
-            auto = 0
-          [http "https://github.com/"]
-            extraheader = AUTHORIZATION: basic ***
-          [branch "main"]
-            remote = origin
-            merge = refs/heads/main'
-          echo "$gitconfigfile" > .git/config
-          less .git/config
+#      - name: Configure Local Repository
+#        run: |
+#          gitconfigfile='[core]
+#            repositoryformatversion = 0
+#            filemode = true
+#            bare = false
+#            logallrefupdates = true
+#          [remote "origin"]
+#            url = https://github.com/dzbaker/cFE
+#            fetch = +refs/heads/*:refs/remotes/origin/*
+#          [remote "origin"]
+#            fetch = +refs/pull/*:refs/remotes/origin/pull/
+#            gh-resolved = base
+#          [gc]
+#            auto = 0
+#          [http "https://github.com/"]
+#            extraheader = AUTHORIZATION: basic ***
+#          [branch "main"]
+#            remote = origin
+#            merge = refs/heads/main'
+#          echo "$gitconfigfile" > .git/config
+#          less .git/config
       - name: Rebase IC Branch
         run: |
           git config user.name "GitHub Actions Bot"
@@ -53,5 +53,6 @@ jobs:
           prs=$(echo ${{ inputs.pr_nums }} | tr "," "\n")
           for pr in $prs
           do
+              git fetch origin pull/$pr/head
               git merge origin/pull/$pr/head --no-ff -m "Merge pull request #$pr from branch\n\nmessage"
           done
