@@ -47,8 +47,8 @@ jobs:
         run: |
           rev_num=$(git rev-list v7.0.0-rc4.. --count)
           changelog_entry=$'#Changelog\n\n## Development Build: v7.0.0-rc4+dev'${rev_num}
-          sed -i 's/Changelog/"$changelog_entry"/' CHANGELOG.md
+          sed -i 's/Changelog/"${changelog_entry}"/' CHANGELOG.md
           buildnumber_entry=$'#define CFE_BUILD_NUMBER   '${rev_num}$' /**< @brief Development: Number of development git commits since CFE_BUILD_BASELINE */'
-          sed -i 's/define CFE_BUILD_NUMBER.*/"$buildnumber_entry"/' modules/core_api/fsw/inc/cfe_version.h
+          sed -i 's/define CFE_BUILD_NUMBER.*/"${buildnumber_entry}"/' modules/core_api/fsw/inc/cfe_version.h
           head CHANGELOG.md
           cat modules/core_api/fsw/inc/cfe_version.h
