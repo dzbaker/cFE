@@ -19,6 +19,9 @@ jobs:
         with:
           fetch-depth: '0'
           ref: main
+      - name: Configure Local Repository
+        run: |
+          ls -a
       - name: Rebase IC Branch
         run: |
           git config user.name "GitHub Actions Bot"
