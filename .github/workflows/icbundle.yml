@@ -28,7 +28,7 @@ jobs:
           git rebase main
       - name: Merge each PR
         run: |
-          prs = $(echo ${{ inputs.pr_nums }} | | tr "," "\n")
+          prs = $(echo ${{ inputs.pr_nums }} | tr "," "\n")
           for pr in $prs
           do
               echo $pr
