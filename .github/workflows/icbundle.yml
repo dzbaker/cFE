@@ -1,4 +1,4 @@
-name: "Integration Candidate Bundle Generation"
+name: Integration Candidate Bundle Generation
 
 on:
   workflow_dispatch:
