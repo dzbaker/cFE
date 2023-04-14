@@ -53,18 +53,12 @@ jobs:
           see_entry=$'- See:'
           for pr in $prs
           do
-            echo 1
             pr_title=$(hub pr show -f %t $pr)
-            echo 2
             changelog_entry="${changelog_entry}"$'\n- '"${pr_title}"
-            echo 3
             see_entry="${see_entry}"$' <https://github.com/nasa/cFE/pull/'${pr}$'>'
-            echo 4
           done
-          echo 5
           changelog_entry="${changelog_entry}${see_entry}"
-          echo 6
-          echo $changelog_entry
+          echo "s/Changelog/$changelog_entry/"
           sed -i "s/Changelog/$changelog_entry/" CHANGELOG.md
           
           buildnumber_entry=$'#define CFE_BUILD_NUMBER   '${rev_num}$' /**< @brief Development: Number of development git commits since CFE_BUILD_BASELINE */'
