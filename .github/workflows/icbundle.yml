@@ -21,10 +21,25 @@ jobs:
           ref: main
       - name: Configure Local Repository
         run: |
-          gitconfigfile="[remote "origin"]
+          gitconfigfile='[core]
+            repositoryformatversion = 0
+            filemode = true
+            bare = false
+            logallrefupdates = true
+          [remote "origin"]
+            url = https://github.com/dzbaker/cFE
+            fetch = +refs/heads/*:refs/remotes/origin/*
+          [remote "origin"]
             fetch = +refs/pull/*:refs/remotes/origin/pull/
             gh-resolved = base
-          echo "$gitconfigfile" >> .git/config
+          [gc]
+            auto = 0
+          [http "https://github.com/"]
+            extraheader = AUTHORIZATION: basic ***
+          [branch "main"]
+            remote = origin
+            merge = refs/heads/main'
+          echo "$gitconfigfile" > .git/config
           less .git/config
       - name: Rebase IC Branch
         run: |
