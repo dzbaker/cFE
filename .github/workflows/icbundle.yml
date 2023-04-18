@@ -54,7 +54,7 @@ jobs:
           for pr in $prs
           do
             pr_title=$(hub pr show -f %t $pr)
-            changelog_entry="${changelog_entry}"$'\\\n\-\ '"${pr_title}"
+            changelog_entry="${changelog_entry}"$'\\\n\-\ '"${pr_title@Q}"
             see_entry="${see_entry}"$'\ \<https:\/\/github.com\/nasa\/cFE\/pull\/'${pr}$'\>'
           done
           changelog_entry="${changelog_entry}\n${see_entry}\n"
