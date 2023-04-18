@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           rev_num=$(git rev-list v7.0.0-rc4.. --count)
-          changelog_entry=$'#Changelog\\n\\n## Development Buildo:o v7.0.0-rc4+dev'${rev_num}
+          changelog_entry=$'#Changelog\\n\\n##o Development oBuild: v7.0.0-rc4+dev'${rev_num}
           prs=$(echo ${{ inputs.pr_nums }} | tr "," "\n")
           see_entry=$'\-\ See:'
           for pr in $prs
