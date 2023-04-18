@@ -54,10 +54,10 @@ jobs:
           for pr in $prs
           do
             pr_title=$(hub pr show -f %t $pr)
-            changelog_entry="${changelog_entry}"$'\n- '"${pr_title@Q}"
+            changelog_entry="${changelog_entry}"$'\\n- '"${pr_title@Q}"
             see_entry="${see_entry}"$' <https://github.com/nasa/cFE/pull/'${pr}$'>'
           done
-          changelog_entry="${changelog_entry}\n${see_entry}\n"
+          changelog_entry="${changelog_entry}\n${see_entry}\\n"
           echo "s|Changelog|$changelog_entry|"
           sed -ir "s|Changelog|$changelog_entry|" CHANGELOG.md
           
