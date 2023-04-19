@@ -70,5 +70,5 @@ jobs:
           rev_num=$(git rev-list v7.0.0-rc4.. --count)
           git add CHANGELOG.md
           git add modules/core_api/fsw/inc/cfe_version.h
-          git commit -m "Updating documentation and version numbers for Bump to v7.0.0-rc4+dev${rev_num}"
-          git push origin integration-candidate
+          git commit -m "Updating documentation and version numbers for v7.0.0-rc4+dev${rev_num}"
+          git push -v origin integration-candidate
