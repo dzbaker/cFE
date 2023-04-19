@@ -58,7 +58,7 @@ jobs:
             see_entry="${see_entry}"$' <https://github.com/nasa/cFE/pull/'${pr}$'>'
           done
           changelog_entry="${changelog_entry}\n\n${see_entry}\\n"
-          echo "s|Changelog|$changelog_entry|"
+          echo "s|oChangelog|$changelog_entry|"
           sed -ir "s|Changelog|$changelog_entry|" CHANGELOG.md
           
           buildnumber_entry=$'#define CFE_BUILD_NUMBER   '${rev_num}$' /**< @brief Development: Number of development git commits since CFE_BUILD_BASELINE */'
