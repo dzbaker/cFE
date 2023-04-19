@@ -64,6 +64,8 @@ jobs:
           buildnumber_entry=$'#define CFE_BUILD_NUMBER   '${rev_num}$' /**< @brief Development: Number of development git commits since CFE_BUILD_BASELINE */'
           sed -ir "s|define CFE_BUILD_NUMBER.*|$buildnumber_entry|" modules/core_api/fsw/inc/cfe_version.h
       - name: Commit and Push Updates to IC Branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           rev_num=$(git rev-list v7.0.0-rc4.. --count)
           git add CHANGELOG.md
