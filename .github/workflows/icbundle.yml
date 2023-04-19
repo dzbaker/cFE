@@ -62,6 +62,6 @@ jobs:
           awk '/^# Changelog/ { print "${changelog_entry}"; next; }; { print; }' CHANGELOG.md > CHANGELOG.md
           
           buildnumber_entry=$'#define CFE_BUILD_NUMBER   '${rev_num}$' /**< @brief Development: Number of development git commits since CFE_BUILD_BASELINE */'
-          sed -i "s/define CFE_BUILD_NUMBER.*/$buildnumber_entry/" modules/core_api/fsw/inc/cfe_version.h
+          sed -ir "s|define CFE_BUILD_NUMBER.*|$buildnumber_entry|" modules/core_api/fsw/inc/cfe_version.h
           head CHANGELOG.md
           cat modules/core_api/fsw/inc/cfe_version.h
