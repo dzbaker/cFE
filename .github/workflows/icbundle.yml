@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           rev_num=$(git rev-list v7.0.0-rc4.. --count)
-          changelog_entry=$'# Changelog\\n\\n## Development Build: v7.0.0-rc4+dev'${rev_num}
+          changelog_entry=$' Changelog\\n\\n## Development Build: v7.0.0-rc4+dev'${rev_num}
           prs=$(echo ${{ inputs.pr_nums }} | tr "," "\n")
           see_entry=$'\-\ See:'
           for pr in $prs
@@ -59,9 +59,9 @@ jobs:
           done
           changelog_entry="${changelog_entry}\n${see_entry}\n"
           echo "s|# Changelog|$changelog_entry|"
-          sed -ir "s|Changelog|$changelog_entry|" CHANGELOG.md
+          sed -ir "0,s|Changelog|$changelog_entry|" CHANGELOG.md
           
-          buildnumber_entry=$'#define CFE_BUILD_NUMBER   '${rev_num}$' /**< @brief Development: Number of development git commits since CFE_BUILD_BASELINE */'
+          buildnumber_entry=$'define CFE_BUILD_NUMBER   '${rev_num}$' /**< @brief Development: Number of development git commits since CFE_BUILD_BASELINE */'
           sed -ir "s|define CFE_BUILD_NUMBER.*|$buildnumber_entry|" modules/core_api/fsw/inc/cfe_version.h
       - name: Commit and Push Updates to IC Branch
         env:
